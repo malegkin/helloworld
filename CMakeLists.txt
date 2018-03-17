@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 
-project (helloworld)
+project (helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 add_executable(helloworld ./src/main.cpp)
 
