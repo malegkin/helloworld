@@ -1,6 +1,13 @@
 cmake_minimum_required(VERSION 3.9)
 
-project (helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+SET(BUILD_NUMBER "999")
+
+IF(DEFINED $ENV{TRAVIS_BUILD_NUMBER})
+    SET(BUILD_NUMBER $ENV{TRAVIS_BUILD_NUMBER})
+ENDIF(NOT DEFINED TRAVIS_BUILD_NUMBER)
+
+
+project (helloworld VERSION 0.0.${BUILD_NUMBER})
 
 add_executable(helloworld ./src/main.cpp)
 
