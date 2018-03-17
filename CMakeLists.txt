@@ -14,7 +14,7 @@ find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 
 ##version library
-configure_file(./src/version.h.in ./src/version.h)
+configure_file(${CMAKE_SOURCE_DIR}/src/version.h.in ${CMAKE_SOURCE_DIR}/src/version.h)
 add_library(version ./src/version.cpp)
 
 #main app
