@@ -1,7 +1,4 @@
-cmake_minimum_required(VERSION 3.9)
-
-#dependences
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+cmake_minimum_required(VERSION 3.2)
 
 #Build Version Configuration
 SET(BUILD_NUMBER "999")
@@ -11,8 +8,10 @@ IF(DEFINED ENV{TRAVIS_BUILD_NUMBER})
 ENDIF()
 
 
-#main
 project (helloworld VERSION 0.0.${BUILD_NUMBER})
+
+find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+
 
 ##version library
 configure_file(./src/version.h.in ./src/version.h)
