@@ -1,20 +1,36 @@
 cmake_minimum_required(VERSION 3.2)
 
-#Build Version Configuration
+#get project version
 SET(BUILD_NUMBER "999")
 
 IF(DEFINED ENV{TRAVIS_BUILD_NUMBER})
     SET(BUILD_NUMBER $ENV{TRAVIS_BUILD_NUMBER})
 ENDIF()
 
+file (STRINGS "version" PROJECT_VERSION)
 
-project (helloworld VERSION 0.0.${BUILD_NUMBER})
+#init project
+project (helloworld VERSION ${PROJECT_VERSION}.${BUILD_NUMBER})
 
+#inclue cmake modules
+SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+
+#find Boost unit_test_framework
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
+# get TCLAP
+find_package(TCLAP REQUIRED)
+include_directories(${TCLAP_INCLUDE_DIR})
 
 ##version library
-configure_file(${CMAKE_SOURCE_DIR}/src/version.h.in ${CMAKE_SOURCE_DIR}/src/version.h)
+# configure a header file to pass some of the CMake settings
+# to the source code
+configure_file(
+    ${CMAKE_SOURCE_DIR}/src/version.h.in 
+    ${CMAKE_SOURCE_DIR}/src/version.h
+)
+
+
 add_library(version ./src/version.cpp)
 
 #main app

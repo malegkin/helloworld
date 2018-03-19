@@ -1,5 +1,9 @@
 #pragma ones
 
+#include <string>
+
+#cmakedefine PROJECT_VERSION "@PROJECT_VERSION@"
 #cmakedefine PROJECT_VERSION_PATCH @PROJECT_VERSION_PATCH@
 
-int version();
+int         getProjectBuildNumber();
+std::string getProjectVersion();
